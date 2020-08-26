@@ -60,5 +60,13 @@ extension ViewController: UITableViewDataSource {
         cell.textLabel?.text = listaTarefas[indexPath.row]
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            listaTarefas.remove(at: indexPath.row)
+            UserDefaults.standard.set(self.listaTarefas, forKey: self.listaKey)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
 }
 
